@@ -3,8 +3,17 @@
         "import/resolver": {
             "node": {
                 "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            },
+            "typescript": {
+                "project": "./tsconfig.json"
             }
         }
+    },
+    "globals": {
+        "React": true,
+        "JSX": true,
+        "ChildNode": true,
+        "NodeListOf": true
     },
     "env": {
         "browser": true,
@@ -32,6 +41,7 @@
                 "extensions": [".js", ".jsx", ".tsx", ".ts"]
             }
         ],
+        "react/jsx-props-no-spreading": "off",
         "import/extensions": [
             "error",
             "ignorePackages",
@@ -49,6 +59,10 @@
             {
                 "devDependencies": true
             }
-        ]
+        ],
+        "no-shadow": "off",
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-shadow": ["error"],
+        "react/require-default-props": "off"
     }
 }

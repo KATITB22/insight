@@ -15,6 +15,7 @@ const Login: React.FC<{ setState: Function }> = ({
         username: '',
         password: '',
     });
+    const [showPassword, setShowPassword] = useState(false);
     const redirectIfHaveToken: Function = async () => {
         const token = await APIClient.checkToken();
         if (Object.keys(token).length > 0) {
@@ -89,7 +90,7 @@ const Login: React.FC<{ setState: Function }> = ({
                                 id="username"
                                 name="username"
                                 placeholder="NIM/No. Registrasi"
-                                className="w-full px-3 py-2 border-2 rounded-lg border-blue-300 focus:outline-none focus:border-blue-500 placeholder:text-[#79B3F9] placeholder:font-mediu text-[#79B3F9]"
+                                className="w-full px-3 py-2 border-2 rounded-lg border-blue-300 focus:outline-none focus:border-blue-500 placeholder:text-[#79B3F9] placeholder:font-medium text-[#79B3F9]"
                             />
                             {errors.username && (
                                 <span className="text-red-500 block py-1 px-2 text-sm rounded-md bg-red-200 w-full self-start">
@@ -106,9 +107,9 @@ const Login: React.FC<{ setState: Function }> = ({
                         >
                             <input
                                 name="password"
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 placeholder="Password"
-                                className="w-full px-3 py-2 border-2 rounded-lg border-blue-300 focus:outline-none focus:border-blue-500 placeholder:text-[#79B3F9] placeholder:font-mediu text-[#79B3F9]"
+                                className="w-full px-3 py-2 border-2 rounded-lg border-blue-300 focus:outline-none focus:border-blue-500 placeholder:text-[#79B3F9] placeholder:font-medium text-[#79B3F9]"
                             />
                             {errors.password && (
                                 <span className="text-red-500 block py-1 px-2 text-sm rounded-md bg-red-200 w-full self-start">
@@ -116,6 +117,23 @@ const Login: React.FC<{ setState: Function }> = ({
                                 </span>
                             )}
                         </label>
+                        <div className="flex items-center justify-center self-start gap-2">
+                            <label htmlFor="checkbox" className="self-center">
+                                <input
+                                    type="checkbox"
+                                    id="checkbox"
+                                    checked={showPassword}
+                                    className="border-blue-300 border-2"
+                                    onChange={() =>
+                                        setShowPassword(
+                                            (prevShowPassword) =>
+                                                !prevShowPassword
+                                        )
+                                    }
+                                />
+                            </label>
+                            <p className="text-sm text-white">Show password</p>
+                        </div>
                     </div>
 
                     <button

@@ -8,14 +8,17 @@
         "build": "yarn lint && tsc && vite build",
         "preview": "vite preview",
         "prepare": "husky install",
-        "lint": "yarn eslint ./src/** --fix && yarn prettier --write .",
-        "lint:auto": "yarn eslint ./src/** --fix --no-color && yarn prettier --write --no-color ."
+        "lint": "yarn eslint --fix  && yarn prettier --write .",
+        "lint:auto": "yarn eslint src/ --fix --no-color --ext .js,.jsx,.ts,.tsx && yarn prettier --write --no-color ."
     },
     "dependencies": {
         "@emotion/react": "^11.10.0",
+        "axios": "^0.27.2",
         "react": "^18.0.0",
         "react-dom": "^18.0.0",
-        "react-router-dom": "^6.3.0"
+        "react-router-dom": "^6.3.0",
+        "react-toastify": "^9.0.8",
+        "universal-cookie": "^4.0.4"
     },
     "devDependencies": {
         "@types/react": "^18.0.0",
@@ -27,7 +30,8 @@
         "eslint": "^7.32.0 || ^8.2.0",
         "eslint-config-airbnb": "^19.0.4",
         "eslint-config-prettier": "^8.5.0",
-        "eslint-plugin-import": "^2.25.3",
+        "eslint-import-resolver-typescript": "^3.4.2",
+        "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-jsx-a11y": "^6.5.1",
         "eslint-plugin-react": "^7.28.0",
         "eslint-plugin-react-hooks": "^4.3.0",
@@ -38,7 +42,8 @@
         "prettier": "2.6.2",
         "tailwindcss": "^3.1.2",
         "typescript": "^4.6.3",
-        "vite": "^2.9.9"
+        "vite": "^2.9.9",
+        "vite-tsconfig-paths": "^3.5.0"
     },
     "lint-staged": {
         "**/*.{js,jsx,ts,tsx}": [

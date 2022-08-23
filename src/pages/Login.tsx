@@ -76,35 +76,51 @@ const Login: React.FC<{ setState: Function }> = ({
                         />
                     </div>
                 </div>
-                <form onSubmit={onFinish}>
-                    <label
-                        className="block mb-2 text-sm text-gray-700 font-caption"
-                        htmlFor="username"
-                    >
-                        <input
-                            id="username"
-                            name="username"
-                            placeholder="NIM/No. Registrasi"
-                            className="w-full px-3 py-2 border rounded-lg border-gray-300 focus:outline-none focus:border-blue-500"
-                        />
-                        <span className="text-red-500">{errors.username}</span>
-                    </label>
+                <form
+                    onSubmit={onFinish}
+                    className="flex flex-col justify-center items-center w-full gap-2"
+                >
+                    <div className="flex flex-col items-center justify-center w-full">
+                        <label
+                            className="mb-2 text-sm text-gray-700 font-caption flex flex-col items-center justify-center gap-1 w-full"
+                            htmlFor="username"
+                        >
+                            <input
+                                id="username"
+                                name="username"
+                                placeholder="NIM/No. Registrasi"
+                                className="w-full px-3 py-2 border-2 rounded-lg border-blue-300 focus:outline-none focus:border-blue-500 placeholder:text-[#79B3F9] placeholder:font-mediu text-[#79B3F9]"
+                            />
+                            {errors.username && (
+                                <span className="text-red-500 block py-1 px-2 text-sm rounded-md bg-red-200 w-full self-start">
+                                    {errors.username}
+                                </span>
+                            )}
+                        </label>
+                    </div>
 
-                    <label
-                        className="block mb-2    text-sm text-gray-700 font-caption"
-                        htmlFor="password"
-                    >
-                        <input
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                            className="w-full px-3 py-2 border rounded-lg border-gray-300 focus:outline-none focus:border-blue-500"
-                        />
-                        <span className="text-red-500">{errors.password}</span>
-                    </label>
+                    <div className="flex flex-col items-center justify-center w-full">
+                        <label
+                            className="mb-2 text-sm text-gray-700 font-caption flex flex-col items-center justify-center gap-1 w-full"
+                            htmlFor="password"
+                        >
+                            <input
+                                name="password"
+                                type="password"
+                                placeholder="Password"
+                                className="w-full px-3 py-2 border-2 rounded-lg border-blue-300 focus:outline-none focus:border-blue-500 placeholder:text-[#79B3F9] placeholder:font-mediu text-[#79B3F9]"
+                            />
+                            {errors.password && (
+                                <span className="text-red-500 block py-1 px-2 text-sm rounded-md bg-red-200 w-full self-start">
+                                    {errors.password}
+                                </span>
+                            )}
+                        </label>
+                    </div>
+
                     <button
                         type="submit"
-                        className="w-full bg-[#174B7A] font-medium text-white focus:ring-4 focus:outline-none hover:bg-Blue hover:text-dark rounded-md py-1"
+                        className="w-full bg-[#174B7A] font-medium text-white focus:ring-2 focus:outline-none hover:bg-Blue hover:text-black hover:text-dark rounded-md py-1"
                     >
                         <span className="w-48">Sign In</span>
                     </button>

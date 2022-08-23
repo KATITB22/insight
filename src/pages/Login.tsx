@@ -66,55 +66,49 @@ const Login: React.FC<{ setState: Function }> = ({
 
     return (
         <div className="flex justify-center items-center h-screen bg-Blue">
-            <div className="basis-3/4 md:basis-7/12 md:scale-[1.3] lg:max-w-lg bg-white">
-                <div className="rounded-lg shadow-lg border-0">
-                    <div className="flex justify-center mb-3 md:mb-5 flex-wrap">
-                        <div className="w-1/2">
-                            <img
-                                src={Logo}
-                                className="shadow rounded-full max-w-full h-auto align-middle border-none"
-                                alt="logo"
-                            />
-                        </div>
+            <div className="basis-3/4 md:basis-7/12 md:scale-[1.3] lg:max-w-lg rounded-md overflow-hidden py-5 px-3 bg-[#79B3F9]">
+                <div className="flex justify-center mb-3 md:mb-5 flex-wrap">
+                    <div className="w-1/2">
+                        <img
+                            src={Logo}
+                            className="max-w-full h-auto align-middle border-none"
+                            alt="logo"
+                        />
                     </div>
-                    <form onSubmit={onFinish}>
-                        <label
-                            className="block mb-2 text-sm text-gray-700 font-caption"
-                            htmlFor="username"
-                        >
-                            <input
-                                id="username"
-                                name="username"
-                                placeholder="NIM/No. Registrasi"
-                                className="w-full px-3 py-2 border rounded-lg border-gray-300 focus:outline-none focus:border-blue-500"
-                            />
-                            <span className="text-red-500">
-                                {errors.username}
-                            </span>
-                        </label>
-
-                        <label
-                            className="block mb-2 text-sm text-gray-700 font-caption"
-                            htmlFor="password"
-                        >
-                            <input
-                                name="password"
-                                type="password"
-                                placeholder="Password"
-                                className="w-full px-3 py-2 border rounded-lg border-gray-300 focus:outline-none focus:border-blue-500"
-                            />
-                            <span className="text-red-500">
-                                {errors.password}
-                            </span>
-                        </label>
-                        <button
-                            type="submit"
-                            className="w-full text-black bg-Gray focus:ring-4 focus:outline-none hover:bg-Blue hover:text-dark"
-                        >
-                            <span className="w-48">Sign In</span>
-                        </button>
-                    </form>
                 </div>
+                <form onSubmit={onFinish}>
+                    <label
+                        className="block mb-2 text-sm text-gray-700 font-caption"
+                        htmlFor="username"
+                    >
+                        <input
+                            id="username"
+                            name="username"
+                            placeholder="NIM/No. Registrasi"
+                            className="w-full px-3 py-2 border rounded-lg border-gray-300 focus:outline-none focus:border-blue-500"
+                        />
+                        <span className="text-red-500">{errors.username}</span>
+                    </label>
+
+                    <label
+                        className="block mb-2    text-sm text-gray-700 font-caption"
+                        htmlFor="password"
+                    >
+                        <input
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            className="w-full px-3 py-2 border rounded-lg border-gray-300 focus:outline-none focus:border-blue-500"
+                        />
+                        <span className="text-red-500">{errors.password}</span>
+                    </label>
+                    <button
+                        type="submit"
+                        className="w-full bg-[#174B7A] font-medium text-white focus:ring-4 focus:outline-none hover:bg-Blue hover:text-dark rounded-md py-1"
+                    >
+                        <span className="w-48">Sign In</span>
+                    </button>
+                </form>
             </div>
         </div>
     );

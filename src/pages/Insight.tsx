@@ -4,13 +4,14 @@ import React, { useState } from 'react';
 import Image1 from '@/assets/images/dummy_image.jpg';
 import Image2 from '@/assets/images/dummy_image1.jpg';
 import Image3 from '@/assets/images/dummy_image2.jpg';
+import ThankYouPage from '@assets/images/thank-you-page.png';
 import CloseIcon from '@/assets/images/close_icon.png';
 import ReplayIcon from '@/assets/images/replay_icon.png';
 import LogoutIcon from '@/assets/images/logout_icon.png';
 import Carousel from '@/components/Carousel';
 import AuthService from '@/service/auth';
 
-const images = [Image1, Image2, Image3];
+const images = [Image1, Image2, Image3, ThankYouPage];
 
 const Insight: React.FC<{}> = () => {
     const [isViewInsight, setIsViewInsight] = useState(true);

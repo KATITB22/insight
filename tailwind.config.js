@@ -10,6 +10,7 @@ module.exports = {
                 xl: '1280px',
             },
             colors: {
+                DarkBlue: '#0d3240',
                 Blue: '#96BBE6',
                 White: '#FFFFFF',
                 Gray: '#EEEEEE',

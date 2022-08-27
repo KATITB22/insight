@@ -62,4 +62,5 @@ const Insight: React.FC<{}> = () => {
         </div>
     );
 };
+
 export default Insight;

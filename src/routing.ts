@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageRouting } from './types/interface';
 
-const ComingSoon = React.lazy(() => import('./pages/ComingSoon'));
+// const ComingSoon = React.lazy(() => import('./pages/ComingSoon'));
 const Insight = React.lazy(() => import('./pages/Insight'));
 
 const PageNotFound = React.lazy(() =>
@@ -17,14 +17,14 @@ const PageNotFoundRouting: PageRouting = {
 };
 
 export const Routing: PageRouting[] = [
-    {
-        title: 'Coming Soon Page',
-        path: '/',
-        component: ComingSoon,
-    },
+    // {
+    //     title: 'Coming Soon Page',
+    //     path: '/',
+    //     component: ComingSoon,
+    // },
     {
         title: 'Main Page',
-        path: '/insight',
+        path: '*',
         component: Insight,
     },
     PageNotFoundRouting,

@@ -38,6 +38,21 @@ function App() {
     return (
         <UserContext.Provider value={contextValue}>
             <Suspense fallback={<div>Loading...</div>}>
+                {/* <BrowserRouter>
+                    <Routes>
+                        {Routing.map((route) => {
+                            const Component = route.component;
+                            return (
+                                <Route
+                                    caseSensitive
+                                    path={route.path}
+                                    key={route.path}
+                                    element={<Component />}
+                                />
+                            );
+                        })}
+                    </Routes>
+                </BrowserRouter> */}
                 {isLoggedIn && (
                     <BrowserRouter>
                         <Routes>

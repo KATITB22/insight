@@ -114,7 +114,7 @@ const Insight: React.FC<{}> = () => {
                 setLoading(false);
             }
         );
-    }, [images]);
+    }, []);
 
     if (loading) {
         return <Spinner />;

@@ -36,7 +36,7 @@ const Insight: React.FC<{}> = () => {
             (response) => {
                 setLoading(true);
                 const fetchData = response as {
-                    image_url: string | string[];
+                    image_url: string;
                     page: number;
                 }[];
 
@@ -58,30 +58,26 @@ const Insight: React.FC<{}> = () => {
                 }
 
                 let image3: string[] = [];
-                let objImage3 = fetchData.filter((obj) => obj.page === 3)[0];
-                if (!objImage3) {
-                    objImage3 = {
-                        image_url: [FormNotAvailable],
-                        page: 3,
-                    };
+                const arrObjImage3 = fetchData.filter((obj) => obj.page === 3);
+
+                if (arrObjImage3.length === 0) {
+                    image3 = [FormNotAvailable];
                 } else {
-                    image3 = (objImage3.image_url as string[]).map(
-                        (type: string) => {
-                            if (type === 'Pilih Event') {
-                                return PilihEventImage;
-                            }
-                            if (type === 'Tidak Pilih Event') {
-                                return TidakPilihEventImage;
-                            }
-                            if (type === 'Pilih Assignment') {
-                                return PilihAssignmentImage;
-                            }
-                            if (type === 'Tidak Pilih Assignment') {
-                                return TidakPilihAssignmentImage;
-                            }
-                            return FormNotAvailable;
+                    image3 = arrObjImage3.map((type) => {
+                        if (type.image_url === 'Pilih Event') {
+                            return PilihEventImage;
                         }
-                    );
+                        if (type.image_url === 'Tidak Pilih Event') {
+                            return TidakPilihEventImage;
+                        }
+                        if (type.image_url === 'Pilih Assignment') {
+                            return PilihAssignmentImage;
+                        }
+                        if (type.image_url === 'Tidak Pilih Assignment') {
+                            return TidakPilihAssignmentImage;
+                        }
+                        return FormNotAvailable;
+                    });
                 }
 
                 let image4 = appendUrl(
@@ -93,15 +89,12 @@ const Insight: React.FC<{}> = () => {
                 }
 
                 let image5: string[] = [];
-                let objImage5 = fetchData.filter((obj) => obj.page === 5)[0];
-                if (!objImage5) {
-                    objImage5 = {
-                        image_url: [FormNotAvailable],
-                        page: 5,
-                    };
+                const arrObjImage5 = fetchData.filter((obj) => obj.page === 5);
+                if (arrObjImage5.length === 0) {
+                    image5 = [FormNotAvailable];
                 } else {
-                    image5 = (objImage5.image_url as string[]).map((url) =>
-                        appendUrl(url)
+                    image5 = arrObjImage5.map((url) =>
+                        appendUrl(url.image_url!)
                     );
                 }
 

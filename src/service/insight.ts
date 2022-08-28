@@ -13,6 +13,8 @@ class InsightService {
     ) {
         const response = await APIClient.GET('/insight-results');
 
+        console.log(response);
+
         if (response instanceof APIErrorObject) {
             if (!onFail) return;
 

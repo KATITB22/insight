@@ -23,6 +23,7 @@ import Spinner from '@/components/Spinner';
 // page 1 samitra
 // page 2 absen/presensi
 // page 4 form
+const appendUrl = (url: string) => `https://insight-file.katitb22.com/${url}`;
 
 const Insight: React.FC<{}> = () => {
     const [isViewInsight, setIsViewInsight] = useState(true);
@@ -39,15 +40,19 @@ const Insight: React.FC<{}> = () => {
                     page: number;
                 }[];
 
-                const image0 = fetchData[0].image_url;
-                let image1 = fetchData.filter((obj) => obj.page === 1)[0]
-                    .image_url;
+                const image0 = appendUrl(fetchData[0].image_url as string);
+                let image1 = appendUrl(
+                    fetchData.filter((obj) => obj.page === 1)[0]
+                        .image_url as string
+                );
                 if (!image1) {
                     image1 = SamitraNotAvailable;
                 }
 
-                let image2 = fetchData.filter((obj) => obj.page === 2)[0]
-                    .image_url;
+                let image2 = appendUrl(
+                    fetchData.filter((obj) => obj.page === 2)[0]
+                        .image_url as string
+                );
                 if (!image2) {
                     image2 = PresenceNotAvailable;
                 }
@@ -79,8 +84,10 @@ const Insight: React.FC<{}> = () => {
                     );
                 }
 
-                let image4 = fetchData.filter((obj) => obj.page === 4)[0]
-                    .image_url;
+                let image4 = appendUrl(
+                    fetchData.filter((obj) => obj.page === 4)[0]
+                        .image_url as string
+                );
                 if (!image4) {
                     image4 = FormNotAvailable;
                 }
@@ -93,7 +100,9 @@ const Insight: React.FC<{}> = () => {
                         page: 5,
                     };
                 } else {
-                    image5 = objImage5.image_url as string[];
+                    image5 = (objImage5.image_url as string[]).map((url) =>
+                        appendUrl(url)
+                    );
                 }
 
                 setImages([

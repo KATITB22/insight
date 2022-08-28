@@ -24,7 +24,7 @@ export const Routing: PageRouting[] = [
     // },
     {
         title: 'Main Page',
-        path: '*',
+        path: '/',
         component: Insight,
     },
     PageNotFoundRouting,

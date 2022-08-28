@@ -11,7 +11,7 @@ class InsightService {
         onSuccess?: SuccessCallbackFunction,
         onFail?: FailureCallbackFunction
     ) {
-        const response = await APIClient.GET('/api/insight-results');
+        const response = await APIClient.GET('/insight-results');
 
         if (response instanceof APIErrorObject) {
             if (!onFail) return;

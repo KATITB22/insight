@@ -112,7 +112,6 @@ const Insight: React.FC<{}> = () => {
             (error) => {
                 toast.error(error.toString());
                 setLoading(false);
-                console.log(error);
             }
         );
     }, [images]);

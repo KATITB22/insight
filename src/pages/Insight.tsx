@@ -40,7 +40,10 @@ const Insight: React.FC<{}> = () => {
                     page: number;
                 }[];
 
-                const image0 = appendUrl(fetchData[0].image_url as string);
+                const image0 = appendUrl(
+                    fetchData.filter((obj) => obj.page === 0)[0]
+                        .image_url as string
+                );
                 let image1 = appendUrl(
                     fetchData.filter((obj) => obj.page === 1)[0]
                         .image_url as string

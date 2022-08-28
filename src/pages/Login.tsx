@@ -39,17 +39,6 @@ const Login: React.FC<{ setState: Function }> = ({
             username,
             password,
             (response) => {
-                if (
-                    response.user.role !== 'Participant' &&
-                    response.user.role !== 'Mentor'
-                ) {
-                    toast.error(
-                        'You are not authorized to access this page. Only mentor and participant can see this webpage'
-                    );
-                    setLoading(false);
-                    setState(false);
-                    return;
-                }
                 toast.success(`Login Successfull (${response.user.username})`);
                 setState(true);
                 setLoading(false);

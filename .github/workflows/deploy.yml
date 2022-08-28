@@ -1,0 +1,58 @@
+# Deploy
+
+name: insight-deploy
+
+on:
+    push:
+        tags:
+            - 'v*.*.*'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@master
+            - name: Check Tag
+              id: check-tag
+              run: |
+                  if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+                      echo ::set-output name=match::true
+                  fi
+            - name: Get the version
+              id: get-version
+              run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+            - name: Run builder script over SSH
+              if: steps.check-tag.outputs.match == 'true'
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.DEUS_HOST }}
+                  port: 22
+                  username: ${{ secrets.DEUS_USERNAME }}
+                  key: ${{ secrets.KEY }}
+                  script: |
+                      cd ~/builder/insight
+                      rm -rf ~/builder/insight/src
+                      git fetch --all
+                      git checkout tags/${{ steps.get-version.outputs.VERSION }}
+                      git restore .
+                      yarn ci
+                      yarn build --mode production
+    deploy:
+        needs: ['build']
+        runs-on: ubuntu-latest
+        steps:
+            - name: Run deployment script over SSH
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.DEUS_HOST }}
+                  port: 22
+                  username: ${{ secrets.DEUS_USERNAME }}
+                  key: ${{ secrets.KEY }}
+                  script: |
+                      rm -rf ~/deus/web/insight
+                      mkdir ~/deus/web/insight
+                      cp -r ~/builder/insight/dist/* ~/deus/web/insight
+                      chmod -R 755 ~/deus/web/insight
+                      cd deus
+                      docker-compose restart insightfe

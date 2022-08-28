@@ -1,9 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
-import Image1 from '@/assets/images/dummy_image.jpg';
-import Image2 from '@/assets/images/dummy_image1.jpg';
-import Image3 from '@/assets/images/dummy_image2.jpg';
 import ThankYouPage from '@assets/images/thank-you-page.png';
 import SamitraNotAvailable from '@/assets/images/samitra_not_available_page.png';
 import PresenceNotAvailable from '@/assets/images/presence_not_available_page.png';
@@ -17,7 +14,9 @@ import ReplayIcon from '@/assets/images/replay_icon.png';
 import LogoutIcon from '@/assets/images/logout_icon.png';
 import Carousel from '@/components/Carousel';
 import AuthService from '@/service/auth';
-
+import InsightService from '@/service/insight';
+import { toast } from 'react-toastify';
+import Spinner from '@/components/Spinner';
 // const images = [Image1, Image2, Image3, ThankYouPage];
 
 // page 0 pasti ada
@@ -25,104 +24,100 @@ import AuthService from '@/service/auth';
 // page 2 absen/presensi
 // page 4 form
 
-const dataMock = [
-    {
-        image_url: Image1,
-        page: 0,
-    },
-    {
-        image_url: Image2,
-        page: 1,
-    },
-    {
-        image_url: Image3,
-        page: 2,
-    },
-    {
-        image_url: [Image1, Image2],
-        page: 3,
-    },
-    {
-        image_url: Image3,
-        page: 4,
-    },
-    {
-        image_url: [Image1, Image2, Image3],
-        page: 5,
-    },
-];
-
 const Insight: React.FC<{}> = () => {
     const [isViewInsight, setIsViewInsight] = useState(true);
     const [images, setImages] = useState<string[]>([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        // fetch di sini, UBAH DI SINI
-        const fetchData = dataMock;
+        // fetch di sini, UBAH DI SIN
+        InsightService.getInsights(
+            (response) => {
+                setLoading(true);
+                const fetchData = response as {
+                    image_url: string | string[];
+                    page: number;
+                }[];
 
-        const image0 = fetchData[0].image_url;
-        let image1 = fetchData.filter((obj) => obj.page === 1)[0].image_url;
-        if (!image1) {
-            image1 = SamitraNotAvailable;
-        }
-
-        let image2 = fetchData.filter((obj) => obj.page === 2)[0].image_url;
-        if (!image2) {
-            image2 = PresenceNotAvailable;
-        }
-
-        let image3: string[] = [];
-        let objImage3 = fetchData.filter((obj) => obj.page === 3)[0];
-        if (!objImage3) {
-            objImage3 = {
-                image_url: [FormNotAvailable],
-                page: 3,
-            };
-        } else {
-            image3 = (objImage3.image_url as string[]).map((type: string) => {
-                if (type === 'Pilih Event') {
-                    return PilihEventImage;
+                const image0 = fetchData[0].image_url;
+                let image1 = fetchData.filter((obj) => obj.page === 1)[0]
+                    .image_url;
+                if (!image1) {
+                    image1 = SamitraNotAvailable;
                 }
-                if (type === 'Tidak Pilih Event') {
-                    return TidakPilihEventImage;
-                }
-                if (type === 'Pilih Assignment') {
-                    return PilihAssignmentImage;
-                }
-                if (type === 'Tidak Pilih Assignment') {
-                    return TidakPilihAssignmentImage;
-                }
-                return FormNotAvailable;
-            });
-        }
 
-        let image4 = fetchData.filter((obj) => obj.page === 4)[0].image_url;
-        if (!image4) {
-            image4 = FormNotAvailable;
-        }
+                let image2 = fetchData.filter((obj) => obj.page === 2)[0]
+                    .image_url;
+                if (!image2) {
+                    image2 = PresenceNotAvailable;
+                }
 
-        let image5: string[] = [];
-        let objImage5 = fetchData.filter((obj) => obj.page === 5)[0];
-        if (!objImage5) {
-            objImage5 = {
-                image_url: [FormNotAvailable],
-                page: 5,
-            };
-        } else {
-            image5 = objImage5.image_url as string[];
-        }
+                let image3: string[] = [];
+                let objImage3 = fetchData.filter((obj) => obj.page === 3)[0];
+                if (!objImage3) {
+                    objImage3 = {
+                        image_url: [FormNotAvailable],
+                        page: 3,
+                    };
+                } else {
+                    image3 = (objImage3.image_url as string[]).map(
+                        (type: string) => {
+                            if (type === 'Pilih Event') {
+                                return PilihEventImage;
+                            }
+                            if (type === 'Tidak Pilih Event') {
+                                return TidakPilihEventImage;
+                            }
+                            if (type === 'Pilih Assignment') {
+                                return PilihAssignmentImage;
+                            }
+                            if (type === 'Tidak Pilih Assignment') {
+                                return TidakPilihAssignmentImage;
+                            }
+                            return FormNotAvailable;
+                        }
+                    );
+                }
 
-        setImages([
-            image0 as string,
-            image1 as string,
-            image2 as string,
-            ...image3,
-            image4 as string,
-            ...image5,
-            ThankYouPage,
-        ]);
+                let image4 = fetchData.filter((obj) => obj.page === 4)[0]
+                    .image_url;
+                if (!image4) {
+                    image4 = FormNotAvailable;
+                }
+
+                let image5: string[] = [];
+                let objImage5 = fetchData.filter((obj) => obj.page === 5)[0];
+                if (!objImage5) {
+                    objImage5 = {
+                        image_url: [FormNotAvailable],
+                        page: 5,
+                    };
+                } else {
+                    image5 = objImage5.image_url as string[];
+                }
+
+                setImages([
+                    image0 as string,
+                    image1 as string,
+                    image2 as string,
+                    ...image3,
+                    image4 as string,
+                    ...image5,
+                    ThankYouPage,
+                ]);
+                setLoading(false);
+            },
+            (error) => {
+                toast.error(error.toString());
+                setLoading(false);
+                console.log(error);
+            }
+        );
     }, [images]);
 
+    if (loading) {
+        return <Spinner />;
+    }
     return (
         <div className="w-screen h-screen bg-black ">
             {isViewInsight ? (

@@ -38,9 +38,18 @@ const Login: React.FC<{ setState: Function }> = ({
         await AuthService.login(
             username,
             password,
-            (response) => {
-                toast.success(`Login Successfull (${response.user.username})`);
-                setState(true);
+            async (response) => {
+                const token = await APIClient.checkToken();
+                if (Object.keys(token).length > 0) {
+                    toast.success(
+                        `Login Successfull (${response.user.username})`
+                    );
+                    setState(true);
+                    setLoading(false);
+                    return;
+                }
+                toast.error('Only mentor and participant can open this page');
+                setState(false);
                 setLoading(false);
             },
             (error) => {

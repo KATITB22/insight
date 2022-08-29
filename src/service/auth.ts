@@ -3,6 +3,7 @@
 import APIClient from '@/utils/api-client';
 import { APIErrorObject } from '@/utils/api-error-object';
 
+type AsyncSuccessCbFunction = (response: Record<string, any>) => Promise<void>;
 type SuccessCallbackFunction = (response: Record<string, any>) => void;
 type FailureCallbackFunction = (error: APIErrorObject) => void;
 
@@ -10,7 +11,7 @@ class AuthService {
     public async login(
         nim: string,
         password: string,
-        onSuccess?: SuccessCallbackFunction,
+        onSuccess?: AsyncSuccessCbFunction,
         onFail?: FailureCallbackFunction
     ) {
         const response = await APIClient.POST('/auth/local', {
@@ -27,7 +28,7 @@ class AuthService {
 
         APIClient.setToken(response.jwt);
         if (onSuccess) {
-            onSuccess(response);
+            await onSuccess(response);
         }
     }
 

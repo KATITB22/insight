@@ -31,6 +31,11 @@ class APIClient {
             }
             return {};
         }
+        if (response.role !== 'Mentor' && response.role !== 'Participant') {
+            this.token = '';
+            this.deleteCookie('token');
+            return {};
+        }
         return response;
     }
 
